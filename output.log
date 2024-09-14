@@ -1,0 +1,167 @@
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ nvcc vector_add.cu -o vector_add
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ nvprof ./vector_add
+==2129== NVPROF is profiling process 2129, command: ./vector_add
+out[0] = 3.000000
+PASSED
+==2129== Profiling application: ./vector_add
+==2129== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   93.32%  547.49ms         1  547.49ms  547.49ms  547.49ms  vector_add(float*, float*, float*, int)
+                    4.97%  29.153ms         1  29.153ms  29.153ms  29.153ms  [CUDA memcpy DtoH]
+                    1.71%  10.055ms         2  5.0273ms  5.0078ms  5.0468ms  [CUDA memcpy HtoD]
+      API calls:   63.19%  588.80ms         3  196.27ms  5.1765ms  577.56ms  cudaMemcpy
+                   19.97%  186.08ms         3  62.026ms  111.05us  185.84ms  cudaMalloc
+                   16.55%  154.24ms         1  154.24ms  154.24ms  154.24ms  cudaLaunchKernel
+                    0.27%  2.5161ms         3  838.71us  249.87us  1.1411ms  cudaFree
+                    0.02%  147.95us       114  1.2970us     150ns  56.088us  cuDeviceGetAttribute
+                    0.00%  12.340us         1  12.340us  12.340us  12.340us  cuDeviceGetName
+                    0.00%  9.9840us         1  9.9840us  9.9840us  9.9840us  cuDeviceGetPCIBusId
+                    0.00%  1.4320us         3     477ns     232ns     963ns  cuDeviceGetCount
+                    0.00%     848ns         2     424ns     178ns     670ns  cuDeviceGet
+                    0.00%     528ns         1     528ns     528ns     528ns  cuDeviceTotalMem
+                    0.00%     376ns         1     376ns     376ns     376ns  cuDeviceGetUuid
+                    0.00%     329ns         1     329ns     329ns     329ns  cuModuleGetLoadingMode
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+
+
+
+
+
+
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ nvcc vector_add_thread.cu -o vector_add_thread
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ nvprof ./vector_add_thread
+==2366== NVPROF is profiling process 2366, command: ./vector_add_thread
+PASSED
+==2366== Profiling application: ./vector_add_thread
+==2366== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   55.17%  29.020ms         1  29.020ms  29.020ms  29.020ms  [CUDA memcpy DtoH]
+                   25.81%  13.577ms         1  13.577ms  13.577ms  13.577ms  vector_add(float*, float*, float*, int)
+                   19.02%  10.004ms         2  5.0021ms  4.9776ms  5.0266ms  [CUDA memcpy HtoD]
+      API calls:   64.09%  136.44ms         3  45.479ms  117.87us  136.20ms  cudaMalloc
+                   25.23%  53.707ms         3  17.902ms  5.0527ms  43.495ms  cudaMemcpy
+                    9.42%  20.057ms         1  20.057ms  20.057ms  20.057ms  cudaLaunchKernel
+                    1.18%  2.5071ms         3  835.70us  250.69us  1.1352ms  cudaFree
+                    0.07%  150.31us       114  1.3180us     164ns  57.543us  cuDeviceGetAttribute
+                    0.01%  11.374us         1  11.374us  11.374us  11.374us  cuDeviceGetName
+                    0.01%  11.360us         1  11.360us  11.360us  11.360us  cuDeviceGetPCIBusId
+                    0.00%  1.4370us         3     479ns     242ns     945ns  cuDeviceGetCount
+                    0.00%  1.1150us         2     557ns     446ns     669ns  cuDeviceGet
+                    0.00%     570ns         1     570ns     570ns     570ns  cuDeviceTotalMem
+                    0.00%     404ns         1     404ns     404ns     404ns  cuDeviceGetUuid
+                    0.00%     359ns         1     359ns     359ns     359ns  cuModuleGetLoadingMode
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+
+
+
+
+
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ nvcc vector_add_grid.cu -o vector_add_grid
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ nvprof ./vector_add_grid
+==2615== NVPROF is profiling process 2615, command: ./vector_add_grid
+PASSED
+==2615== Profiling application: ./vector_add_grid
+==2615== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   74.21%  29.144ms         1  29.144ms  29.144ms  29.144ms  [CUDA memcpy DtoH]
+                   25.40%  9.9761ms         2  4.9881ms  4.9793ms  4.9968ms  [CUDA memcpy HtoD]
+                    0.39%  153.69us         1  153.69us  153.69us  153.69us  vector_add(float*, float*, float*, int)
+      API calls:   70.97%  136.49ms         3  45.495ms  115.38us  136.24ms  cudaMalloc
+                   20.99%  40.370ms         3  13.457ms  5.0709ms  30.186ms  cudaMemcpy
+                    6.63%  12.758ms         1  12.758ms  12.758ms  12.758ms  cudaLaunchKernel
+                    1.31%  2.5156ms         3  838.54us  254.80us  1.1389ms  cudaFree
+                    0.08%  157.17us       114  1.3780us     149ns  60.540us  cuDeviceGetAttribute
+                    0.01%  21.221us         1  21.221us  21.221us  21.221us  cuDeviceGetName
+                    0.01%  10.151us         1  10.151us  10.151us  10.151us  cuDeviceGetPCIBusId
+                    0.00%  1.7960us         3     598ns     235ns  1.3250us  cuDeviceGetCount
+                    0.00%     907ns         2     453ns     188ns     719ns  cuDeviceGet
+                    0.00%     573ns         1     573ns     573ns     573ns  cuDeviceTotalMem
+                    0.00%     421ns         1     421ns     421ns     421ns  cuDeviceGetUuid
+                    0.00%     369ns         1     369ns     369ns     369ns  cuModuleGetLoadingMode
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$ 
+ubuntu@ip-172-31-30-176:~/rohith/vector-add$
+
+
+----------------------------------------------------------------
+
+
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ nvcc matrix_multiplication.cu -o matrix_multiplication
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ ./matrix_multiplication 
+^Z
+[2]+  Stopped                 ./matrix_multiplication
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ nvprof ./matrix_multiplication
+==3737== NVPROF is profiling process 3737, command: ./matrix_multiplication
+PASSED
+==3737== Profiling application: ./matrix_multiplication
+==3737== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   99.99%  48.0177s         1  48.0177s  48.0177s  48.0177s  matrix_mul(float*, float*, float*, int)
+                    0.00%  1.8464ms         1  1.8464ms  1.8464ms  1.8464ms  [CUDA memcpy DtoH]
+                    0.00%  870.88us         2  435.44us  419.10us  451.77us  [CUDA memcpy HtoD]
+      API calls:   99.63%  48.0259s         3  16.0086s  586.06us  48.0231s  cudaMemcpy
+                    0.37%  177.74ms         3  59.247ms  112.28us  177.51ms  cudaMalloc
+                    0.00%  1.3999ms         1  1.3999ms  1.3999ms  1.3999ms  cudaLaunchKernel
+                    0.00%  507.00us         3  169.00us  158.37us  180.87us  cudaFree
+                    0.00%  148.98us       114  1.3060us     156ns  57.011us  cuDeviceGetAttribute
+                    0.00%  10.860us         1  10.860us  10.860us  10.860us  cuDeviceGetPCIBusId
+                    0.00%  10.780us         1  10.780us  10.780us  10.780us  cuDeviceGetName
+                    0.00%  1.6590us         3     553ns     236ns  1.1210us  cuDeviceGetCount
+                    0.00%     935ns         2     467ns     206ns     729ns  cuDeviceGet
+                    0.00%     564ns         1     564ns     564ns     564ns  cuDeviceTotalMem
+                    0.00%     392ns         1     392ns     392ns     392ns  cuModuleGetLoadingMode
+                    0.00%     295ns         1     295ns     295ns     295ns  cuDeviceGetUuid
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+
+
+
+
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ nvcc matrix_multiplication_grid.cu -o matrix_multiplication_grid
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ ./matrix_multiplication_grid
+PASSED
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ nvprof ./matrix_multiplication_grid
+==2157== NVPROF is profiling process 2157, command: ./matrix_multiplication_grid
+PASSED
+==2157== Profiling application: ./matrix_multiplication_grid
+==2157== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   44.19%  1.7805ms         1  1.7805ms  1.7805ms  1.7805ms  [CUDA memcpy DtoH]
+                   30.48%  1.2282ms         1  1.2282ms  1.2282ms  1.2282ms  matrix_mul(float*, float*, float*, int)
+                   25.33%  1.0207ms         2  510.35us  510.33us  510.36us  [CUDA memcpy HtoD]
+      API calls:   95.44%  166.32ms         3  55.441ms  99.890us  166.05ms  cudaMalloc
+                    3.30%  5.7518ms         3  1.9173ms  576.31us  4.5260ms  cudaMemcpy
+                    0.86%  1.4964ms         1  1.4964ms  1.4964ms  1.4964ms  cudaLaunchKernel
+                    0.29%  503.16us         3  167.72us  163.52us  172.46us  cudaFree
+                    0.09%  161.80us       114  1.4190us     160ns  64.531us  cuDeviceGetAttribute
+                    0.01%  19.951us         1  19.951us  19.951us  19.951us  cuDeviceGetName
+                    0.01%  9.8700us         1  9.8700us  9.8700us  9.8700us  cuDeviceGetPCIBusId
+                    0.00%  1.7460us         3     582ns     231ns  1.2170us  cuDeviceGetCount
+                    0.00%     855ns         2     427ns     167ns     688ns  cuDeviceGet
+                    0.00%     463ns         1     463ns     463ns     463ns  cuDeviceTotalMem
+                    0.00%     368ns         1     368ns     368ns     368ns  cuDeviceGetUuid
+                    0.00%     346ns         1     346ns     346ns     346ns  cuModuleGetLoadingMode
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
+ubuntu@ip-172-31-30-176:~/rohith/matrix-multiplication$ 
